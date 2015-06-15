@@ -23,8 +23,6 @@ namespace ColoroidNET {
 		};
 
 
-		// colors definition by original game:
-		// red, blue, green, pink, black/dark-gray, cyan
 
 		#endregion
 
