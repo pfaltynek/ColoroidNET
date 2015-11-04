@@ -11,9 +11,17 @@ namespace ColoroidNET {
 			orig_fg = Console.ForegroundColor;
 			orig_bg = Console.BackgroundColor;
 
-			Console.Write ("Console colors");
+			Console.SetWindowSize(80, 50);
+
+			Console.Write ("Console colors ({0}x{1})", Console.WindowWidth, Console.WindowHeight);
+			Console.Write(" ");
+			Console.ForegroundColor = ConsoleColor.Blue;
+			Console.BackgroundColor = ConsoleColor.Yellow;
+			Console.Write("\u2580\u2584\u2580\u2584\u2580\u2584\u2580\u2584");
+
 			colors = System.Enum.GetValues (typeof(ConsoleColor));
 
+			//get maximum length of color name first
 			foreach (var item in colors) {
 				if (item.ToString ().Length > max_len) {
 					max_len = item.ToString ().Length;
