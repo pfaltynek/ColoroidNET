@@ -6,33 +6,62 @@ using System.Threading.Tasks;
 
 namespace ColoroidGame {
 	public class ColoroidGame {
-
-		#region consts
-
-		private const int GameSizeMax = 35;
-		private const int GameSizeMin = 4;
-		private const int GameSizeDefault = GameSizeMin;
-		//private const int GameParsSize = GameSizeMax - GameSizeMin + 1;
-
-		#endregion
-
-		#region static items
-
-		private static Random _rnd = new Random((int)DateTime.Now.Ticks);
-		private static int[] _pars = {
-			7, 9, 11, 13, 15, 17, 19, // 4-10
-			20, 22, 24, 26, 28, 30, 32, 34, 36, 38, //11-20
-			39, 41, 43, 45, 47, 49, 51, 53, 55, 57, //21-30
-			58, 60, 62, 64, 66 //31-35
-		};
-
-
-
-		#endregion
-
 		#region ctor
 
 		public ColoroidGame() {
+
+		}
+
+		#endregion
+
+		#region properties
+
+		private ColoroidGameField[,] _game_fields = null;
+
+		private int _steps = 0;
+		public int Steps {
+			get { return _steps; }
+		}
+
+		private ColoroidGameSize _current_game_size;
+		public ColoroidGameSize CurrentGameSize {
+			get { return _current_game_size; }
+		}
+
+		public int CurrentGameSizeNum {
+			get { return (int)_current_game_size; }
+		}
+
+		#endregion
+
+		#region public methods
+
+		public void StartGame(ColoroidGameSize size) {
+			GenerateGame(size);
+		}
+
+		public void CancelGame() {
+
+		}
+
+		public void GameTurnByColor(ColoroidGameFieldColor color) {
+
+		}
+
+		#endregion
+
+		#region private methods
+
+		private void GenerateGame(ColoroidGameSize size) {
+			_current_game_size = size;
+			int game_size = CurrentGameSizeNum;
+			_game_fields = new ColoroidGameField[game_size, game_size];
+
+			for (int j = 0; j < game_size; j++) {
+				for (int i = 0; i < game_size; i++) {
+					_game_fields[i, j].SetColor(ColoroidGameFieldColorRandomizer.GetNext());
+				}
+			}
 
 		}
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoroidNET", "ColoroidNET\ColoroidNET.csproj", "{934441FD-2279-47BB-8BDE-8B4DE7C6C71B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoroidConsole", "ColoroidConsole\ColoroidConsole.csproj", "{934441FD-2279-47BB-8BDE-8B4DE7C6C71B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoroidGame", "ColoroidGame\ColoroidGame.csproj", "{12B928AF-08D3-4115-8C2B-309B32FC4E54}"
 EndProject

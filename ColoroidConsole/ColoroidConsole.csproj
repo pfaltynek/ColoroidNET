@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -35,8 +35,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ColoroidGame.cs" />
-    <Compile Include="ColoroidColor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ColoroidGame\ColoroidGame.csproj">
+      <Project>{12b928af-08d3-4115-8c2b-309b32fc4e54}</Project>
+      <Name>ColoroidGame</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

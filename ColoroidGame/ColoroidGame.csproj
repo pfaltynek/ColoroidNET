@@ -43,6 +43,9 @@
     <Compile Include="ColoroidGame.cs" />
     <Compile Include="ColoroidGameField.cs" />
     <Compile Include="ColoroidGameFieldBorder.cs" />
+    <Compile Include="ColoroidGameFieldColorRandomizer.cs" />
+    <Compile Include="ColoroidGameLevel.cs" />
+    <Compile Include="ColoroidGamePar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
