@@ -7,7 +7,7 @@ namespace ColoroidGame {
 		Red = 0,
 		Blue = 1,
 		Green = 2,
-		Pink = 3,
+		Magenta = 3,
 		DarkGray = 4,
 		Cyan = 5
 	}
