@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ColoroidGame {
 	internal static class ColoroidGamePar {
-		static int GetColoroidGamePar(ColoroidGameSize size) {
+		internal static int GetColoroidGamePar(ColoroidGameSize size) {
 			switch (size){
 				case ColoroidGameSize.Size4x4:
 					return 7;
