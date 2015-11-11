@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ColoroidGame {
+﻿namespace ColoroidGame {
 	// colors definition by original game:
 	// red, blue, green, pink, black/dark-gray, cyan
 	public enum ColoroidGameFieldColor {
