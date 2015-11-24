@@ -68,6 +68,8 @@
 					_game_fields[i, j].SetColor(ColoroidGameFieldColorRandomizer.GetNext());
 				}
 			}
+			// mark all
+			PerformGameTurn(_game_fields[0, 0].Color);
 		}
 
 		private void PerformGameTurn(ColoroidGameFieldColor color) {
@@ -81,6 +83,113 @@
 
 
 			//signal that turn done - >refresh of game fields needed
+		}
+
+		private bool CheckFieldRecursive(int x, int y, ColoroidGameFieldColor prev, ColoroidGameFieldColor new_color) {
+			#region hint from c++ impementation but BUGGY!
+			/*
+			bool ColoroidGame::MarkPlayFieldColourRecursive(unsigned char color_index, int field_index) {
+				bool finished = true;
+				int size = m_global_data->GetGameSize();
+
+				m_colors[field_index] = color_index | PLAY_FIELD_FLAG;
+
+				// left
+				if(field_index % size) {
+					if ((m_colors[field_index - 1] & PLAY_FIELD_NO_BORDER_MASK ) != (color_index | PLAY_FIELD_FLAG)) {
+						if (m_colors[field_index - 1] & PLAY_FIELD_FLAG) {
+							// found previous play field with different color - go recursive
+							if (!MarkPlayFieldColourRecursive(color_index, field_index - 1))
+								finished = false;
+						}
+						else if ((m_colors[field_index - 1] & PLAY_FIELD_COLOR_MASK) == color_index) {
+							// found field with same color not marked as play field - go recursive
+							if (!MarkPlayFieldColourRecursive(color_index, field_index - 1))
+								finished = false;
+						}
+						else {
+							// found field with different color not marked as play field - game not finished, set border of current
+							finished = false;
+							m_colors[field_index] |= PLAY_FIELD_LEFT_BORDER;
+						}
+					}
+				}
+				else m_colors[field_index] |= PLAY_FIELD_LEFT_BORDER;
+
+				// right
+				if((field_index % size) < (size - 1)) {
+					if ((m_colors[field_index + 1] & PLAY_FIELD_NO_BORDER_MASK ) != (color_index | PLAY_FIELD_FLAG)) {
+						if (m_colors[field_index + 1] & PLAY_FIELD_FLAG) {
+							// found previous play field with different color - go recursive
+							if (!MarkPlayFieldColourRecursive(color_index, field_index + 1))
+								finished = false;
+						}
+						else if ((m_colors[field_index + 1] & PLAY_FIELD_COLOR_MASK) == color_index) {
+							// found field with same color not marked as play field - go recursive
+							if (!MarkPlayFieldColourRecursive(color_index, field_index + 1))
+								finished = false;
+						}
+						else {
+							// found field with different color not marked as play field - game not finished, set border of current
+							finished = false;
+							m_colors[field_index] |= PLAY_FIELD_RIGHT_BORDER;
+						}
+					}
+				}
+				else m_colors[field_index] |= PLAY_FIELD_RIGHT_BORDER;
+
+				// top
+				if(field_index / size) {
+					if ((m_colors[field_index - size] & PLAY_FIELD_NO_BORDER_MASK ) != (color_index | PLAY_FIELD_FLAG)) {
+						if (m_colors[field_index - size] & PLAY_FIELD_FLAG) {
+							// found previous play field with different color - go recursive
+							if (!MarkPlayFieldColourRecursive(color_index, field_index - size))
+								finished = false;
+						}
+						else if ((m_colors[field_index - size] & PLAY_FIELD_COLOR_MASK) == color_index) {
+							// found field with same color not marked as play field - go recursive
+							if (!MarkPlayFieldColourRecursive(color_index, field_index - size))
+								finished = false;
+						}
+						else {
+							// found field with different color not marked as play field - game not finished, set border of current
+							finished = false;
+							m_colors[field_index] |= PLAY_FIELD_TOP_BORDER;
+						}
+					}
+				}
+				else m_colors[field_index] |= PLAY_FIELD_TOP_BORDER;
+
+				// bottom
+				if((field_index / size) < (size - 1)) {
+					if ((m_colors[field_index + size] & PLAY_FIELD_NO_BORDER_MASK ) != (color_index | PLAY_FIELD_FLAG)) {
+						if (m_colors[field_index + size] & PLAY_FIELD_FLAG) {
+							// found previous play field with different color - go recursive
+							if (!MarkPlayFieldColourRecursive(color_index, field_index + size))
+								finished = false;
+						}
+						else if ((m_colors[field_index + size] & PLAY_FIELD_COLOR_MASK) == color_index) {
+							// found field with same color not marked as play field - go recursive
+							if (!MarkPlayFieldColourRecursive(color_index, field_index + size))
+								finished = false;
+						}
+						else {
+							// found field with different color not marked as play field - game not finished, set border of current
+							finished = false;
+							m_colors[field_index] |= PLAY_FIELD_BOTTOM_BORDER;
+						}
+					}
+				}
+				else m_colors[field_index] |= PLAY_FIELD_BOTTOM_BORDER;
+
+				return finished;
+			}
+			*/
+			#endregion
+
+			bool result = true;
+
+			return result;
 		}
 
 		#endregion
