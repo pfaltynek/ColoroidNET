@@ -36,30 +36,32 @@ namespace ColoroidNET {
 		};
 
 		public static void TestGameLogoTall() {
-			Console.WriteLine();
+			Console.WriteLine ();
 
 			for (int i = 0; i < _logo.Length; i++) {
-				for (int j = 0; j < _logo[i].Length; j++) {
-					Console.BackgroundColor = DecodeConsoleLogoColor(_logo[i][j]);
-					Console.Write(' ');
+				for (int j = 0; j < _logo [i].Length; j++) {
+					Console.BackgroundColor = DecodeConsoleLogoColor (_logo [i] [j]);
+					Console.Write (' ');
 				}
+				Console.WriteLine ();
 			}
 		}
 
 		public static void TestGameLogoHalf() {
-			Console.WriteLine();
+			Console.WriteLine ();
 
 			for (int i = 0; i < _logo.Length; i += 2) {
-				for (int j = 0; j < _logo[i].Length; j++) {
-					if (_logo[i][j].Equals(_logo[i + 1][j])) {
-						Console.BackgroundColor = DecodeConsoleLogoColor(_logo[i][j]);
-						Console.Write(' ');
+				for (int j = 0; j < _logo [i].Length; j++) {
+					if (_logo [i] [j].Equals (_logo [i + 1] [j])) {
+						Console.BackgroundColor = DecodeConsoleLogoColor (_logo [i] [j]);
+						Console.Write (' ');
 					} else {
-						Console.BackgroundColor = DecodeConsoleLogoColor(_logo[i][j]);
-						Console.ForegroundColor = DecodeConsoleLogoColor(_logo[i + 1][j]);
-						Console.Write('\u2584');
+						Console.BackgroundColor = DecodeConsoleLogoColor (_logo [i] [j]);
+						Console.ForegroundColor = DecodeConsoleLogoColor (_logo [i + 1] [j]);
+						Console.Write ('\u2584');
 					}
 				}
+				Console.WriteLine ();
 			}
 		}
 
@@ -82,7 +84,7 @@ namespace ColoroidNET {
 				case 'Y':
 					return ConsoleColor.Yellow;
 				default:
-					throw new ArgumentOutOfRangeException("Unknown console logo color symbol");
+					throw new ArgumentOutOfRangeException ("Unknown console logo color symbol");
 			}
 		}
 
@@ -90,62 +92,71 @@ namespace ColoroidNET {
 
 		static void ConsoleColorsAndBoxesTest() {
 			Array colors;
-			int max_len = 0, row = 1;
+			int max_len = 0, row;
 
 			Console.ForegroundColor = ConsoleColor.Gray;
 			Console.BackgroundColor = ConsoleColor.Black;
-			Console.Clear();
+			//Console.Clear ();
 
-			Console.SetCursorPosition(0, 0);
+			Console.CursorLeft = 0;
+			//Console.SetCursorPosition (0, 0);
+			row = Console.CursorTop;
 
-			// following is not working on Linux
-			//Console.SetWindowSize(80, 50);
-
-			Console.Write("Console colors ({0}x{1})", Console.WindowWidth, Console.WindowHeight);
-			Console.Write(" ");
+			Console.Write ("Console colors ({0}x{1})", Console.WindowWidth, Console.WindowHeight);
+			Console.Write (" ");
 			Console.ForegroundColor = ConsoleColor.Blue;
 			Console.BackgroundColor = ConsoleColor.Yellow;
-			Console.Write("\u2580\u2584\u2580\u2584\u2580\u2584\u2580\u2584");
+			Console.Write ("\u2580\u2584\u2580\u2584\u2580\u2584\u2580\u2584");
+			Console.CursorTop++;
 
-			colors = System.Enum.GetValues(typeof(ConsoleColor));
+			colors = System.Enum.GetValues (typeof(ConsoleColor));
 
 			//get maximum length of color name first
 			foreach (var item in colors) {
-				if (item.ToString().Length > max_len) {
-					max_len = item.ToString().Length;
+				if (item.ToString ().Length > max_len) {
+					max_len = item.ToString ().Length;
 				}
 			}
 
 			foreach (var item in colors) {
-				Console.SetCursorPosition(0, row);
+				Console.CursorLeft = 0;
 				Console.ForegroundColor = ConsoleColor.Gray;
 				Console.BackgroundColor = ConsoleColor.Black;
-				Console.Write(item.ToString());
-				Console.SetCursorPosition(max_len + 1, row);
+				Console.Write (item.ToString ());
+				Console.CursorLeft = max_len + 1;
 				Console.BackgroundColor = (ConsoleColor)item;
-				Console.Write("          ");
-				row++;
+				Console.Write ("          ");
+				Console.CursorTop++;
 			}
 			Console.ForegroundColor = ConsoleColor.Gray;
 			Console.BackgroundColor = ConsoleColor.Black;
-			Console.WriteLine();
+			Console.WriteLine ();
 
-			Console.WriteLine();
-			Console.WriteLine("\u250C\u2500\u2510");
-			Console.WriteLine("\u2502 \u2502");
-			Console.WriteLine("\u2514\u2500\u2518");
+			Console.WriteLine ();
+			Console.WriteLine ("\u250C\u2500\u2510");
+			Console.WriteLine ("\u2502 \u2502");
+			Console.WriteLine ("\u2514\u2500\u2518");
 		}
 
 		public static void TestGameEnums() {
 			foreach (var item in Enum.GetValues(typeof(ColoroidGameSize))) {
-				Console.WriteLine("{0,3}    {1}", (int)item, item.ToString());
+				Console.WriteLine ("{0,3}    {1}", (int)item, item.ToString ());
 			}
 
-			Console.WriteLine();
+			Console.WriteLine ();
 
 			foreach (var item in Enum.GetValues(typeof(ColoroidGameFieldColor))) {
-				Console.WriteLine("{0,3}    {1}", (int)item, item.ToString());
+				Console.WriteLine ("{0,3}    {1}", (int)item, item.ToString ());
 			}
+		}
+
+		private static void WriteDivider() {
+			int w = Console.WindowWidth;
+
+			for (int i = 0; i < w; i++) {
+				Console.Write ("-");
+			}
+			Console.WriteLine ();
 		}
 
 		public static void Main(string[] args) {
@@ -153,10 +164,23 @@ namespace ColoroidNET {
 			orig_fg = Console.ForegroundColor;
 			orig_bg = Console.BackgroundColor;
 
-			ConsoleColorsAndBoxesTest();
-			TestGameEnums();
-			TestGameLogoTall();
-			TestGameLogoHalf();
+			Console.ForegroundColor = ConsoleColor.Gray;
+			Console.BackgroundColor = ConsoleColor.Black;
+			Console.Clear ();
+			Console.WriteLine ();
+
+			WriteDivider ();
+			WriteDivider ();
+			ConsoleColorsAndBoxesTest ();
+			WriteDivider ();
+			TestGameEnums ();
+			WriteDivider ();
+			TestGameLogoTall ();
+			WriteDivider ();
+			TestGameLogoHalf ();
+			WriteDivider ();
+
+			Console.WriteLine ();
 
 			Console.ForegroundColor = orig_fg;
 			Console.BackgroundColor = orig_bg;
